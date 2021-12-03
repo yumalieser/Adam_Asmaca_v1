@@ -1,0 +1,69 @@
+import random
+kelimeler=["kalem","salatalık","çorap","telefon","bilgisayar","kalemlik","kulaklık","hayvan","Atatürk","Cumhuriyet"]
+tahmin_hakki=5
+yanlis_tahmin=[]
+dogru_tahmin=[]
+
+def tahmin(kelime,harfi):
+    sayac = 0
+    harfin_yeri = []
+    for a in kelime:
+        if (a == harf_tahmin):
+            harfin_yeri.append(sayac)
+        sayac +=1
+
+    if(len(harfin_yeri)==0):
+        return False
+    else:
+        return harfin_yeri 
+
+giris = int(input("""***********************************
+ADAM ASMACA OYUNUNA HOŞGELDİNİZ...
+***********************************
+1 - OYUNA BASLA
+2 - KELİME EKLE
+***********************************
+"""))
+if (giris == 1):
+    kelime = random.choice(kelimeler)
+    for i in range(len(kelime)):
+        print("_",end="  ")
+
+    while (tahmin_hakki>=1):
+        harf_tahmin = input("Harf Girin: ")
+        kontrol = tahmin(kelime,harf_tahmin)
+        if (kontrol == False):
+            yanlis_tahmin.append(harf_tahmin)
+            tahmin_hakki-=1
+            print("Yanlış Tahmin Girdiniz. Yanlış Tahminleriniz: ",yanlis_tahmin,"Kalan Tahmin Hakkınız: ",tahmin_hakki)
+        else:
+            for i in kontrol:
+                dogru_tahmin.append(i)
+            for i in range(len(kelime)):
+                print("",end="")
+                if i in dogru_tahmin:
+                    print(kelime[i]+"", end=" ")
+                else:
+                    print("_ ",end=" ")
+                       
+        if (len(dogru_tahmin) == len(kelime)):
+            print("  //  Tebrikler kelimeyi doğru bildiniz...")
+            break
+        
+        k_tahmin = input(" Kelimeyi Tahmin Etmek İster Misiniz (Tahmin Hakkınızdan Düşülecektir.) (E/H): ")
+        if (k_tahmin == "e"):
+            kelime_tahmin=input("Kelime Tahmini Girin: ")
+            if (kelime_tahmin == kelime):
+                print("Tebrikler Kelimeyi Doğru Tahmin Ettiniz...")
+                break
+            else:
+                print("Hatalı Tahminde Bulundunuz...")
+                tahmin_hakki-=1
+        else:
+            continue
+elif (giris == 2):
+    yeni_kelime = input("Eklemek istediğiniz kelimeyi girin: ")
+    kelimeler.append(yeni_kelime)
+    print(kelimeler)
+else:
+    print("Hatalı Giriş...")
